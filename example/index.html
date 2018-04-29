@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>parseme</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,700,700i" rel="stylesheet">
+    <script src="../languages/html.js"></script>
+    <script src="../languages/css.js"></script>
+    <script src="../languages/json.js"></script>
+    <script src="../parseme.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: 'Roboto Mono', monospace;
+        color: #444;
+      }
+
+      h1 {
+        font-size: 60px;
+        line-height: 50px;
+        margin: 0 0 30px 80px;
+      }
+
+      .wrapper {
+        padding: 40px 0;
+      }
+
+      .wrapper.dark {
+        background-color: #444;
+      }
+
+      .wrapper-content {
+        max-width: 950px;
+        margin: 0 auto;
+      }
+
+      .parseme {
+        font-size: 26px;
+        line-height: 26px;
+        padding-top: 30px;
+        padding-right: 80px;
+      }
+
+      .parseme .line {
+        min-height: 26px;
+      }
+
+      .parseme.html::after {
+        content: '<html>';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: #06ade0;
+      }
+
+      .parseme.css::after {
+        content: '#css';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: #ff3385;
+      }
+
+      .parseme.json::after {
+        content: '{json}';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: #ffbf00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="wrapper-content">
+        <h1>parseme</h1>
+        <script type="parseme" class="parseme json default">
+          [{
+            "foo": "bar",
+            "second": [1, 2, null], 
+            "done": false, 
+            "great": true
+          }]
+        </script>
+      </div>
+    </div>
+    <div class="wrapper dark">
+      <div class="wrapper-content">
+        <script type="parseme" class="parseme json dark">
+            [{
+              "foo": "bar",
+              "second": [1, 2, null], 
+              "done": false, 
+              "great": true
+            }]
+        </script>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="wrapper-content">
+
+        <script type="parseme" class="parseme html">
+          <div class="example" style="margin:0;" data-imp>
+            <!-- Comment -->
+            <input  type="text"
+              class="input text"
+              value="foo"
+              checked=checked  />
+            Text  
+            <!-- 
+            Comment 
+            <input  type="text" />
+            --> <a href="src">foo</a>
+            <div class="example">
+            <!--
+            Open comment
+            More comment
+            -->
+          </div>
+        </script>
+
+        <script type="parseme" class="parseme css">
+            /* Comment */
+            .example:not(.e1) {
+              background-color: #fff;
+              color: rgba(200, 200, 200, 0.5);
+              margin: 10px 10px 0 0;
+              position: relative;
+              content: 'text';
+            }
+
+            /* 
+            Comment
+            h1 { color: red; }
+            */
+      
+            /* c1 */ .commented /* c2 */ { /* c3 */
+            /* c4 */  color /* c5 */ : /* c6 */ red /* c7 */ ; /* c8 */
+              margin: 10px 10px /* cv */ 0 0;
+              position: relative;
+              content: 'text';
+              background-image: url('../image.png');
+              background-color: hsl(120, 100%, 75%);
+            /* c9 */ } /* c10 */
+        </script>
+      </div>
+    </div>
+    <div class="wrapper dark">
+      <div class="wrapper-content">
+        <div class="parseme html">
+          <div class="example">
+            <!-- Comment -->
+            <input type="text" />
+            Text
+            <!-- Comment -->
+          </div>
+        </div>
+
+        <div class="parseme css">
+          /* Comment */
+          .example {
+            background-color: #fff;
+            color: rgba(200, 200, 200, 0.5);
+            margin: 10px 10px 0 0;
+            position: relative;
+            content: 'text';
+          }
+
+          /* c1 */ .commented /* c2 */ { /* c3 */
+          /* c4 */  color /* c5 */ : /* c6 */ #fff /* c7 */ ; /* c8 */
+            margin: 10px 10px /* cv */ 0 0;
+            position: relative;
+            content: 'text';
+            background-image: url('../image.png');
+            background-color: hsl(120, 100%, 75%);
+          /* c9 */ } /* c10 */
+        </div>
+      </div>
+    </div>
+    <script>
+      var module = {};
+    </script>
+    <script>
+      parseme.load({
+        language: 'json',
+        selector: '.parseme.json',
+        compilation: true,
+        lines: true
+      });
+
+      parseme.load({
+        language: 'html',
+        selector: '.parseme.html',
+        theme: 'dark',
+        compilation: true
+      });
+
+      parseme.load({
+        language: 'css',
+        selector: '.parseme.css',
+        theme: 'dark',
+        compilation: true,
+        lines: true
+      });
+    </script>
+  </body>
+</html>

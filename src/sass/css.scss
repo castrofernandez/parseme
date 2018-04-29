@@ -1,0 +1,68 @@
+@import '_parseme';
+
+.parseme.css {
+  color: $c-default;
+
+  .comment {
+    color: $c-default;
+  }
+
+  .tab {
+    padding-left: 30px;
+  }
+  
+  .comment {
+    margin: 0 10px;
+  
+    &:first-child {
+    margin-left: 0;
+    }
+  }
+  
+  :not(.comment) {
+    &.property,
+    &.word.in-bracket:not(.value) {
+    color: $c-secondary;
+    }
+  
+    &.value {
+    margin-left: 10px;
+  
+    &.param.p0 {
+      margin-left: 0;
+    }
+    }
+  
+    &.value,
+    &.in-value,
+    &.word.in-value:not(.property) {
+    color: $c-tertiary;
+    }
+  
+    &.color {
+    color: $c-color;
+    }
+  
+    &.function {
+    color: $c-function;
+    }
+  
+    &.number,
+    &.unit {
+    color: $c-number;
+    }
+  
+    &.text {
+    color: $c-text;
+    }
+  
+    &.delimiter {
+    color: $c-default-dark;
+    }
+  
+    &.selector {
+    color: $c-primary;
+    margin-right: 10px;
+    }
+  }
+}

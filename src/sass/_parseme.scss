@@ -1,0 +1,67 @@
+$c-default: #aaa;
+$c-default-dark: #777;
+
+$c-primary: #1a8cff;
+$c-secondary: #06ade0;
+$c-tertiary: #ffbf00;
+
+$c-color: #9f81f7;
+$c-function: #ff3385;
+$c-number: #00cca3;
+$c-text: #f781f3;
+
+.parseme {
+  padding: 5px 20px 5px 80px;
+  margin-bottom: 40px;
+  color: $c-default-dark;
+  position: relative;
+
+  .line {
+    margin: 20px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .token-wrapper {
+    display: inline-block;
+
+    i {
+      font-style: normal;
+    }
+  }
+
+  &.numbered {
+    counter-reset: lines;
+
+    .line {
+      position: relative;
+
+      &::before {
+        counter-increment: lines;
+        content: counter(lines);
+        position: absolute;
+        left: -80px;
+        text-align: right;
+        color: lighten($c-default, 15%);
+        min-width: 40px;
+      }
+    }
+  }
+
+  &.theme-dark {
+    background-color: #444;
+    color: $c-default;
+
+    &.numbered {
+      .line::before {
+        color: darken($c-default, 25%);
+      }
+    }
+  }
+}

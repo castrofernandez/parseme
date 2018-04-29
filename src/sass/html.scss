@@ -1,0 +1,43 @@
+@import '_parseme';
+
+.parseme.html {
+  color: $c-default-dark;
+
+  .comment {
+    color: $c-default;
+    font-style: italic;
+  }
+  
+  @for $i from 0 through 10 {
+    .tab.tab#{$i}x {
+    padding-left: 20px * $i;
+    }
+  }
+  
+  :not(.comment) {
+    &.delimiter,
+    &.comment {
+    color: $c-default-dark;
+    }
+  
+    &.tag {
+    color: $c-primary;
+    }
+  
+    &.attribute {
+    color: $c-secondary;
+    }
+  
+    &.value {
+    color: $c-tertiary;
+    }
+  }
+  
+  &.theme-dark {
+    :not(.comment) {
+    .text {
+      color: #eee;
+    }
+    }
+  }
+}

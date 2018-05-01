@@ -2,7 +2,7 @@ if (typeof window !== 'undefined') {
   require('../sass/html.scss');
 }
 
-const Language = require('./_language');
+const Language = require('../utils/language');
 
 const htmlParse = require('../parsers/html');
 const htmlPrettier = require('../prettiers/html');

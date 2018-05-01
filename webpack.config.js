@@ -5,6 +5,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 const pkg = require('./package.json');
+const fs = require('fs');
+
+const languageFolder = __dirname + '/src/languages/';
 
 let libraryName = pkg.name;
 let outputFile;
@@ -65,42 +68,23 @@ const mainConfig = Object.assign({}, baseConfig, {
   }
 });
 
-const htmlConfig = Object.assign({}, baseConfig, {
-  entry: [__dirname + '/src/languages/html.js'],
-  output: {
-    path: __dirname + '/dist/languages',
-    filename: 'html.js',
-    library: libraryName,
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  }
-});
-
-const cssConfig = Object.assign({}, baseConfig, {
-  entry: [__dirname + '/src/languages/css.js'],
-  output: {
-    path: __dirname + '/dist/languages',
-    filename: 'css.js',
-    library: libraryName,
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  }
-});
-
-const jsonConfig = Object.assign({}, baseConfig, {
-  entry: [__dirname + '/src/languages/json.js'],
-  output: {
-    path: __dirname + '/dist/languages',
-    filename: 'json.js',
-    library: libraryName,
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  }
-});
-
-module.exports = [
-  mainConfig,
-  htmlConfig,
-  cssConfig,
-  jsonConfig
+const configsToExport = [
+  mainConfig
 ];
+
+fs.readdirSync(languageFolder).forEach(file => {
+  configsToExport.push(
+    Object.assign({}, baseConfig, {
+      entry: [__dirname + `/src/languages/${file}`],
+      output: {
+        path: __dirname + '/dist/languages',
+        filename: file,
+        library: libraryName,
+        libraryTarget: 'umd',
+        umdNamedDefine: true
+      }
+    })
+  );
+});
+
+module.exports = configsToExport;

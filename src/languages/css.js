@@ -2,7 +2,7 @@ if (typeof window !== 'undefined') {
   require('../sass/css.scss');
 }
 
-const Language = require('./_language');
+const Language = require('../utils/language');
 
 const cssParse = require('../parsers/css');
 const cssPrettier = require('../prettiers/css');

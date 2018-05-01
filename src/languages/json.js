@@ -2,7 +2,7 @@ if (typeof window !== 'undefined') {
   require('../sass/json.scss');
 }
 
-const Language = require('./_language');
+const Language = require('../utils/language');
 
 const jsonParse = require('../parsers/json');
 const jsonPrettier = require('../prettiers/json');
